@@ -1,26 +1,4 @@
 var cas = document.getElementById('cas');
-<<<<<<< HEAD
-var context= cas.getContext("2d");
-var _w = cas.width,_h = cas.height;
-var pox = 0;
-var poY = 0;
-var radius = 30;
-var insMouseDown=false;
-var att=0;
-var x1 = 0;
-var x2 = 0;
-// 表示鼠标的状态，是否按下，默认为未按下false，按下true生成画布上的遮罩，默认为颜色#666
-
-//device保存设备类型，如果是移动端则为true，pc端为false
-var device = (/android|webos|iPhone|ipad|ipod|blackberry|imembile|opera mini/i.test(navigator.userAgent.toLowerCase()));
-var clickEventName = device ? "touchstart" : "mousedown";
-var moveEventName = device ? "touchmove" : "mousemove";
-var endEventName = device ? "touchend" : "mouseup";
-
-//画矩形
-function drawRect(context){
-	context.fillStyle="#666";
-=======
 var context = cas.getContext('2d');
 var _w = cas.width;
 var _h = cas.height;
@@ -49,7 +27,6 @@ var eventEnd = device ? "touchend" : "mouseup";
 // 生成画布上遮罩，默认颜色为#666
 function drawMask(context){
 	context.fillStyle = "#666";
->>>>>>> test0
 	context.fillRect(0,0,_w,_h);
 	context.globalCompositeOperation = "destination-out";
 }
