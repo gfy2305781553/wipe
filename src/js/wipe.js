@@ -42,6 +42,8 @@ function drawLine(context,x1,y1,x2,y2){
 	context.stroke();
 	context.restore();
 } */
+
+//函数优化
 function drawT(context,x1,y1,x2,y2){
 	if (arguments.length === 3 ) {
 		//调用画点功能
