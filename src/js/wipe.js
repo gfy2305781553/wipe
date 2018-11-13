@@ -6,8 +6,8 @@ var poY = 0;
 var radius = 20;
 var insMouseDown=false;
 var att=0;
-var x1 = 0;
-var x2 = 0;
+// var x1 = 0;
+// var x2 = 0;
 // 表示鼠标的状态，是否按下，默认为未按下false，按下true生成画布上的遮罩，默认为颜色#666
 
 //device保存设备类型，如果是移动端则为true，pc端为false
@@ -23,7 +23,7 @@ function drawRect(context){
 	context.globalCompositeOperation = "destination-out";
 }
 //画圆
-function drawPoint(context,pox,poY){
+/* function drawPoint(context,pox,poY){
 	context.save();
 	context.beginPath();
 	context.arc(pox,poY,30,0,2*Math.PI);
@@ -41,6 +41,28 @@ function drawLine(context,x1,y1,x2,y2){
 	context.lineWidth=radius*2;
 	context.stroke();
 	context.restore();
+} */
+function drawT(context,x1,y1,x2,y2){
+	if (arguments.length === 3 ) {
+		//调用画点功能
+		context.save();
+		context.beginPath();
+		context.arc(pox,poY,30,0,2*Math.PI);
+		context.fillStyle = "red";
+		context.fill();
+		context.stroke();	
+	}else if(arguments.length === 5){
+		context.save();
+		context.lineCap="round";
+		context.beginPath();
+		context.moveTo(x1,y1);
+		context.lineTo(x2,y2);
+		context.lineWidth=radius*2;
+		context.stroke();
+		context.restore();
+	}else{
+		return false;
+	}
 }
 //在canvas画布上监听自定义事件"mousedown"，调用drawPoint函数
 /* cas.addEventListener("mousedown",function(evt){
@@ -58,7 +80,7 @@ cas.addEventListener(clickEventName,function(evt){
 	//获取手指在视口的坐标，传递参数到drawPoint
 	pox = device ? event.touches[0].clientX : event.clientX;
 	poY = device ? event.touches[0].clientY : event.clientY;
-	drawPoint(context,pox,poY);
+	drawT(context,pox,poY);
 },false);
 // cas.addEventListener("mousemove",fn1,false);
 cas.addEventListener(moveEventName,function(evt){
@@ -69,7 +91,7 @@ cas.addEventListener(moveEventName,function(evt){
 		var moveX = device ? event.touches[0].clientX : event.clientX;
 		var moveY = device ? event.touches[0].clientY : event.clientY;
 		// drawPoint(context,pox ,poY);
-		drawLine(context,pox,poY,moveX,moveY);
+		drawT(context,pox,poY,moveX,moveY);
 		pox=moveX;
 		poY=moveY;
 	}
@@ -114,6 +136,6 @@ function getTransparencyPercent(context){
 		return Math.round(percent);
 }
 window.onload = function(){									
-	drawRect(context);
+	drawT(context);
 	// drawPoint(context);
 };
