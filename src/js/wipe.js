@@ -3,7 +3,7 @@ var context= cas.getContext("2d");
 var _w = cas.width,_h = cas.height;
 var pox = 0;
 var poY = 0;
-var radius = 20;
+var radius = 30;
 var insMouseDown=false;
 var att=0;
 var x1 = 0;
