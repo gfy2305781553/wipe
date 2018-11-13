@@ -31,7 +31,7 @@ module.exports = function(grunt){
 			}
 		},
 		clean:{
-			dest:['build/*']
+			dest:['build/*','sample/js/*']
 		},
 		jshint:{
 			test:['src/js/wipe.js'],
@@ -40,17 +40,17 @@ module.exports = function(grunt){
 			}
 		},
 		copy: {
-		    main:{
-		        expand: true, 
-		        cwd: 'src/',
-		        src: '*.php',
-		        dest: 'build/'
-		    },
-		    img: {expand: true, cwd: 'src/images/', src: '**', dest: 'dist/images/'},
-		    css: {expand: true, cwd: 'src/css/', src: '*', dest: 'dist/css/'},
-		    js: {expand: true, cwd: 'src/js/', src: '*', dest: 'dist/js/'},
-		    php:{expand:true, cwd: 'src/', src:'*.php',dest:'dist/'},
-		    file:{expand: true, cwd: 'src/phpqrcode/', src: '**', dest: 'dist/phpqrcode/'}
+		    js: {expand: true, cwd: 'src/js/', src: '*.min.js', dest: 'sample/js/'}
+		},
+		replace:{
+			example:{
+				src:['sample/js/index.html'],
+				overwrite:true,
+				replacements:[{
+					from:/wipe-\.\.min\.js/g,
+					to:'wipe-<%= pkg.version %>.min.js'
+				}]
+			}
 		}
 	});
 	//告诉grunt需要使用插件
@@ -58,7 +58,9 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-text-replace');
 	//告诉grunt当我们输入grunt命令后需要这些什么，有先后顺序
-	grunt.registerTask('default',['jshint','uglify','cssmin']);
+	grunt.registerTask('default',['jshint','clean','uglify','copy']);
 
 };
