@@ -101,6 +101,8 @@ Wipe.prototype.addEvent = function(){
 	this.cas.addEventListener(clickEvtName,function(evt){
 		that.isMouseDown = true;
 		var event = evt || window.event;
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
 		//获取鼠标在视口的坐标，传递参数到drawPoint
 		that.moveX = that.device ?  event.touches[0].clientX : event.clientX;
 		that.moveY = that.device ?  event.touches[0].clientY : event.clientY;
@@ -113,6 +115,8 @@ Wipe.prototype.addEvent = function(){
 			return false;
 		}else{
 			var event = evt || window.event;
+			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
 			event.preventDefault();
 			var x2 = this.device ? event.touches[0].clientX : event.clientX;
 			var y2 = this.device ? event.touches[0].clientY : event.clientY;
